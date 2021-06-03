@@ -1,9 +1,10 @@
-%% Engineering Vibration MATLAB
+%% Lagrangian Mechanics MATLAB
 % Author: Won Bin Choi (B4)
 % E-mail: dc07650@naver.com
 % Organization: Sogang University(Korea, Republic of), Mechanical Engineering
 % Date: April 22, 2021
 clear all; close all; clc;
+
 %% Initilize
 % Time Variables
 Tfinal = 20;     % Simulation time length [sec]

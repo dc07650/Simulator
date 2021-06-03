@@ -1,4 +1,10 @@
-% dynamic simulation
+%% Lagrangian Mechanics MATLAB
+% Author: Won Bin Choi (B4)
+% E-mail: dc07650@naver.com
+% Organization: Sogang University(Korea, Republic of), Mechanical Engineering
+% Date: May 2, 2021
+
+%% dynamic simulation
 clear all; clc; close all;
 T=0.001;            % Sampling Period [sec]
 Tfinal=10;          % Simulation Time [sec]

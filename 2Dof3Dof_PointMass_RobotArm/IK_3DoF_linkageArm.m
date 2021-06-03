@@ -1,5 +1,10 @@
-close all; clear; clc;
+%% Robotics MATLAB
+% Author: Won Bin Choi (B4)
+% E-mail: dc07650@naver.com
+% Organization: Sogang University(Korea, Republic of), Mechanical Engineering
+% Date: June 3, 2021
 
+close all; clear; clc;
 %% Forward Kinematics
 Tfinal = 2;    % Time range (sec)
 T = 0.001;      % Sampling period (sec)

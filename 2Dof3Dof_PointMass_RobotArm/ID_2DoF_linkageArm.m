@@ -1,5 +1,10 @@
-close all; clear; clc;
+%% Robotics MATLAB
+% Author: Won Bin Choi (B4)
+% E-mail: dc07650@naver.com
+% Organization: Sogang University(Korea, Republic of), Mechanical Engineering
+% Date: June 3, 2021
 
+close all; clear; clc;
 %% Forward Kinematics
 Tfinal = 2;    % Time range (sec)
 T = 0.001;      % Sampling period (sec)
@@ -18,43 +23,7 @@ ddtheta = zeros(N,2); % Angle
 F = zeros(N,2); % Force on EE
 m1 = 0;    % Mass of end points
 m2 = 2.5;
-g = 9.81;
-
-%% EE trajection
-% 
-% for k = 1:N
-%    th(k) = 2*pi*(k-1)/N; % 0~2*pi
-%    P(k,:) = [0.5 + th(k)/15*cos(th(k))
-%              0.25 + th(k)/15*sin(th(k))];
-% end
-% 
-% for k = 1:N-1
-%    P_dot(k+1,:) = (P(k+1,:) - P(k,:))/T; %% EE derivative
-% end
-% 
-% theta(1,:) = [330, 75.8864, 88.9287] * pi/180;
-
-% for k = 1:N
-%     if k < N*(1/4)
-%         xr(k) = 0.75;
-%         yr(k) = (0.85-0.25)/(N/4)*(k)+0.25;
-%     elseif k < N*(2/4)
-%         xr(k) = (0.25-0.75)/(N/4)*(k-N*(1/4))+0.75;
-%         yr(k) = (0.75-0.85)/(N/4)*(k-N*(1/4))+0.85;
-%     elseif k < N*(3/4)
-%         xr(k) = 0.25;
-%         yr(k) = (0.5-0.75)/(N/4)*(k-N*(2/4))+0.75;
-%     elseif k <= N*(4/4)
-%         xr(k) = (0.75-0.25)/(N/4)*(k-N*(3/4))+0.25;
-%         yr(k) = (0.25-0.5)/(N/4)*(k-N*(3/4))+0.5;
-%     end
-%     P(k,:) = [xr(k)
-%               yr(k)];
-% end
-% for k = 1:N-1
-%    P_dot(k+1,:) = (P(k+1,:) - P(k,:))/T; %% EE derivative
-% end
-
+g = 9.81; % Gravitational Acceleration
 theta(1,:) = [-34.0071, 105.049] * pi/180;
 
 %% Force Generation
@@ -89,7 +58,7 @@ for k = 1:N-1
     Jacobian = [J(k,1) J(k,2);
                 J(k,3) J(k,4)];
     
-    tau(k,:) = (Jacobian')*F(k,:)';
+    tau(k,:) = (Jacobian')*F(k,:)'; % Transform Cartesian force to Joint space torque
     
     M = [m2*L2^2 + (m1+m2)*L1^2 + 2*m2*L1*L2*cos(theta(k,2)) , m2*L2^2 + m2*L1*L2*cos(theta(k,2));
         m2*L2^2 + m2*L1*L2*cos(theta(k,2))                  , m2*L2^2];
