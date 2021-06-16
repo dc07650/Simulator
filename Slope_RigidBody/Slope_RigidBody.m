@@ -29,10 +29,11 @@ L = 100;            % Slope length [m]
 tau = zeros(1,N);
 %% Simulation
 % Torque Emulation
-Tfinal_torque = 0;
+Tfinal_torque = 5;
 for k=1:N
     if k<round((Tfinal_torque)/(Tfinal)*N,0)
         tau(k)  = 20*(1 - cos(pi*t(k)));
+%         tau(k)  = -200;
     end
 end
 % Equation of Motion
@@ -76,30 +77,32 @@ end
 figure('color','w');
 
 subplot(211); % Graphs of end point
-plot(t,tau,'b','linewidth',2); hold on;
+plot(t(1:k),tau(1:k),'b','linewidth',2); hold on;
 legend('\tau')
 ylabel('Torque [N*m]'); xlabel('Time [sec]')
 
 subplot(212); % Graphs of displacement
-plot(t,ph(:)*180/pi,'r','linewidth',2); hold on;
-plot(t,dph(:)*180/pi,'g','linewidth',2); hold on;
-plot(t,ddph(:)*180/pi,'b','linewidth',2); hold on;
+plot(t(1:k),ph(1:k)*180/pi,'r','linewidth',2); hold on;
+plot(t(1:k),dph(1:k)*180/pi,'g','linewidth',2); hold on;
+plot(t(1:k),ddph(1:k)*180/pi,'b','linewidth',2); hold on;
 legend('\phi [deg]','\omega [deg/s]', '\alpha [deg/s^2]')
 ylabel('Values'); xlabel('Time [sec]')
 
 figure('color','w');
 
 subplot(311); % Graphs of end point
-plot(t,x_s(:),'b','linewidth',2); hold on;
+plot(t(1:k),x_s(1:k),'b','linewidth',2); hold on;
 ylabel('x [m]'); xlabel('Time [sec]')
 
 subplot(312); % Graphs of joint angle
-plot(t,y_s(:),'r','linewidth',2); hold on;
+plot(t(1:k),y_s(1:k),'r','linewidth',2); hold on;
 ylabel('y [m]'); xlabel('Time [sec]')
 
 subplot(313); % Graphs of joint angle
-plot(x_s(:), y_s(:),'b','linewidth',2); hold on;
+plot(x_s(1:k), y_s(1:k),'b','linewidth',2); hold on;
 ylabel('y [m]'); xlabel('x [m]')
+
+disp(sprintf("The simulation ended in %.3f seconds.", t(k)));
 
 %% Functions
 function circle(x,y,r)
